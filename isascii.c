@@ -6,7 +6,7 @@
 // Professor: Scott Edwards
 // Class: CSCI 223 | TR 4:30PM
 // Description:
-//              This program scans the input stream and determines if it con$
+//              This program scans the input stream and determines if it consists
 //              solely of ASCII characters or not.
 // =======================================================================
 
@@ -14,19 +14,28 @@
 
 int main(void)
 {
-    char *inChar;
-    int result;
-    int counter = 0;
+    int inChar;
+    int counter;
+    int nonASCII;
 
-    while((result = scanf("%c", inChar)) != EOF)
+    for(counter = nonASCII = 0; (inChar=getchar()) != EOF; ++ counter)
     {
-        while(result != 1)
+        if(0x80 &inChar)
         {
-            printf("NON-ASCII INPUT: %.2hhx detected at offset 0x%p",)
-            counter ++;
+            printf("NON-ASCII INPUT: %.2x detected at offset %#.2x\n", inChar, counter);
+            ++ nonASCII;
         }
     }
 
+    if(0 == nonASCII)
+    {
+        printf("The input stream was pure ASCII with total of %d bytes read.\n", counter);
+    }
+    else
+    {
+        printf("A total of %d non-ASCII were read.\n", nonASCII);
+    }
 
     return 0;
-}
+
+} // end of main
